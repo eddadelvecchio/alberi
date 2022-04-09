@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+    
+ <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Forza microsoft ad utlizzare la modalità di rederig più avanzata, dal momento che il framework non supporta la modalità di compatibilità -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Mappa Alberi Firenze</title>
+  <!-- Fogli di stile -->
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css/bootstrap.css') }}">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css/map.css') }}">
+  <script src=”leaflet.shpfile.js”></script> 
+  <script src=”shp.js”></script>
+  <!-- <link href="css/stile-mio.css" rel="stylesheet" media="screen"> <!-- CSS che ospiterà gli stili aggiuntivi che sovrascrivono quelli predefiniti del framework -->
+  <!-- Modernizr -->
+  <script src="{{ url_for('static',filename='styles/js/modernizr.custom.js') }}"> </script>
+  <!-- respond.js per IE8 -->
+  <!--[if lt IE 9]>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css/leaflet.css') }}">
+  <script src="{{ url_for('static',filename='styles/js/leaflet.js') }}"> </script>
+  <script src="{{ url_for('static',filename='styles/js/leaflet.wms.js') }}"> </script>
+  <!--<script src="{{ url_for('static',filename='styles/js/myGeoJson.js') }}"></script>
+  <script src="../static/styles/js/alberi_pubbliciMPoint.geojson"></script>-->
+
+ </head>
+    
+ <body>
+     <!-- jQuery e plugin JavaScript  -->
+ <script src="http://code.jquery.com/jquery.js"></script>
+ <script src="{{ url_for('static',filename='styles/js/js/bootstrap.min.js') }}"> </script>
+ 
+ <div class="hero-head">
+    <nav class="navbar">
+        <div class="container">
+
+            <div id="navbarMenuHeroA" class="navbar-menu">
+                <div class="navbar-end">
+                    <a href="{{ url_for('main.index') }}" class="navbar-item">
+                        Home
+                    </a>
+                    <a href="{{ url_for('main.map') }}" class="navbar-item">
+                        Map
+                    </a>
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('main.profile') }}" class="navbar-item">
+                        Profile
+                    </a>
+                    {% endif %}
+                    {% if not current_user.is_authenticated %}
+                    <a href="{{ url_for('auth.login') }}" class="navbar-item">
+                        Login
+                    </a>
+                    <a href="{{ url_for('auth.signup') }}" class="navbar-item">
+                        Sign Up
+                    </a>
+                    {% endif %}
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                        Logout
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+  <div id="mapid"></div>
+  <script src="../static/styles/js/script.js"></script>
+<!--  <script> 
+//    $.getJSON("alberi_pubbliciMPoint.geojson",function(data){
+//    var datalayer = L.geoJson(data ,{
+//    onEachFeature: function(feature, featureLayer) {
+//    featureLayer.bindPopup(feature.properties.ID);
+//    }
+//    }).addTo(map);
+//    //map.fitBounds(datalayer.getBounds());
+//});
+
+  </script> -->
+   
+   
+</body>
+    
+</html>
