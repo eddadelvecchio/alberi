@@ -28,15 +28,20 @@ function onEachFeature(feature, layer) {
 
 const contextmenuItems = [
   {
-    text: "🗺 Show coordinates",
+    text: "🗺 Mostra le coordinate dell'albero",
+    callback: showCoordinates,
+  },
+  
+  {
+    text: "🗺 Mostra le specifiche dell'albero",
     callback: showCoordinates,
   },
   {
-    text: "🚀 Fly Me To The Moon",
+    text: "🚀 Segnala anomalia sull'albero",
     callback: centerMap,
   },
   {
-    text: "🏠 Back to home",
+    text: "🏠 Adotta albero",
     callback: backToHome,
   },
   {
@@ -74,8 +79,16 @@ function centerMap(e) {
   hideMenu();
 }
 
-function backToHome() {
-  map.flyTo([lat, lng], zoom);
+function backToHome(e) {
+  var db = openDatabase('Alberi.db', '1.0', 2 * 1024 * 1024);
+  db.transaction(function (tx) {
+    tx.executeSql('SELECT * FROM features WHERE coordinates[0]= e.lat AND coordinates[1]=e.lng', [], function (tx, results) {
+      var len = results.rows.length, i;
+      for (i = 0; i < len; i++) {
+        alert(results.rows.item(i).text);
+      }
+    });
+});
   marker.closePopup();
   removeTextFromLabel();
   hideMenu();
@@ -169,7 +182,7 @@ function onLocationFound(e) {
   L.marker(e.latlng).addTo(map)
       .bindPopup("You are within " + radius + " meters from this point").openPopup();
 
-  L.circle(e.latlng, radius).addTo(map);
+  L.marker(e.latlng, radius).addTo(map);
 }
 
 map.on('locationfound', onLocationFound);

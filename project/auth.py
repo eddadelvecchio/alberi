@@ -1,3 +1,4 @@
+import sqlite3 as sql
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 import os
 from os.path import join,dirname,realpath
@@ -5,6 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required
 from .models import User
 from . import db
+from .models import Albero
 
 
 auth = Blueprint('auth', __name__)

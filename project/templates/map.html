@@ -70,19 +70,9 @@
 
   <div id="mapid"></div>
   <script src="../static/styles/js/script.js"></script>
-<!--  <script> 
-//    $.getJSON("alberi_pubbliciMPoint.geojson",function(data){
-//    var datalayer = L.geoJson(data ,{
-//    onEachFeature: function(feature, featureLayer) {
-//    featureLayer.bindPopup(feature.properties.ID);
-//    }
-//    }).addTo(map);
-//    //map.fitBounds(datalayer.getBounds());
-//});
-
-  </script> -->
-   
-   
+  <form method="GET" action="/map"></form>
+  <form method="GET" action="/map/ID"></form>
+  <form method="PUT" action="/map/update"></form>
 </body>
     
 </html>
